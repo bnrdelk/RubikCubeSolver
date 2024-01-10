@@ -35,6 +35,7 @@ public class RubicCube {
             facesList.add(face);
         }
     }
+
     public void printCube() {
         // 6 faces, 4 cubie sides
         char[][] printedCube = new char[6][4];
@@ -64,4 +65,3 @@ public class RubicCube {
         System.out.println("        ---------");
     }
 }
-
