@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -15,24 +17,48 @@ public class Main {
 
     public static void main(String[] args) {
         RubicCube cube = new RubicCube();
+		boolean flag = true;
 
-        takeInput(cube);
+		do {
+			System.out.println("Do you want to enter colors of the initial cube manually? y/n");
+			Scanner scanner = new Scanner(System.in);
+			String answer = scanner.nextLine();
+			if (answer.equals("y")) {
+				flag=false;
+				takeInput(cube);
 
-        //Printing the cube based on the inputs
-        System.out.println("\n\t\t\tYour cube");
-        cube.printCube();
+				//Printing the cube based on the inputs
+				System.out.println("Your cube");
+				cube.printCube();
+			} else if (answer.equals("n")) {
+				flag=false;
+				RubicCube rubicCube = new RubicCube();
+
+				System.out.println("Initial cube");
+				cube.printCube();
+
+				// apply rotation
+				rubicCube = rubicCube.rotate('u');
+				rubicCube = rubicCube.rotate('U');
+				// print cube after rotation
+				System.out.println("\nCube after rotation:");
+				rubicCube.printCube();
+			} else {
+				System.out.println("Invalid answer, try again with y or n.");
+			}
+		}while(flag);
+
     }
-
-    private static void takeInput(RubicCube cube){
-        System.out.println("Enter your cube's current state for each face please. (First letters of the colors are enough.)");
-        for(int i = 0; i < 6; i++){
-            System.out.println("\n\t\t\tState of the " + cubeFaces[i] + " face: ");
-            for(int j = 0; j < 4; j++){
-                System.out.print("Color of the " + cubieFaces[j] + ": ");
-                cube.faces[i][j] = getColorFromUser();
-            }
-        }
-    }
+	private static void takeInput(RubicCube cube) {
+		System.out.println("Enter your cube's current state for each face please. (First letters of the colors are enough.)");
+		for (int i = 0; i < 6; i++) {
+			System.out.println("\n\t\t\tState of the " + cubeFaces[i] + " face: ");
+			for (int j = 0; j < 4; j++) {
+				System.out.print("Color of the " + cubieFaces[j] + ": ");
+				cube.facesList.get(i)[j] = getColorFromUser();
+			}
+		}
+	}
 
     private static char getColorFromUser(){
         Scanner scanner = new Scanner(System.in);
