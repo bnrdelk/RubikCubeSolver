@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class RubicCube {
     ArrayList<char[]> facesList;
@@ -66,7 +65,6 @@ public class RubicCube {
         facesList = new ArrayList<>();
         Collections.addAll(facesList, face1, face2, face3, face4, face5, face6);
     }
-
 
     /*       -- ROTATION --       */
     // method to rotate the cube according to parameter

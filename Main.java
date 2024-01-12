@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     /*
@@ -46,9 +44,11 @@ public class Main {
 			} else {
 				System.out.println("Invalid answer, try again with y or n.");
 			}
-		}while(flag);
 
+			scanner.close();
+		}while(flag);
     }
+
 	private static void takeInput(RubicCube cube) {
 		System.out.println("Enter your cube's current state for each face please. (First letters of the colors are enough.)");
 		for (int i = 0; i < 6; i++) {
@@ -67,22 +67,24 @@ public class Main {
         char input = scanner.next().charAt(0);
         input = Character.toLowerCase(input);
         
-        if(!isColorValid(input)){
-            do{
-                input = scanner.next().charAt(0);
-                input = Character.toLowerCase(input);
-                if(isColorValid(input)){
-                    break;
-                }
-                else{
-                    isValid = false;
-                }
-            } while(!isValid);
-        }
-
-        // Scanner'ı kapatınca NoSuchElementException atıyor!!!!!
-        //scanner.close();
-
+		try {
+			if(!isColorValid(input)){
+				do{
+					input = scanner.next().charAt(0);
+					input = Character.toLowerCase(input);
+					if(isColorValid(input)){
+						break;
+					}
+					else{
+						isValid = false;
+					}
+				} while(!isValid);
+        	}
+		} catch (NoSuchElementException e) {
+			// TODO: handle exception
+			scanner.close();
+		}
+        
         return input;
     }
 
